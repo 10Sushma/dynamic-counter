@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'; 
+import './App.css'; 
+import { ListComponent } from './component/ListComponent'; 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+function App() {  
+  const [components, setComponents] = useState([]); 
+  const[submit,setSubmit]=useState(false)
+  const[add,setadd]=useState(false)
+
+  function addComponent() { 
+    components.push(1)   
+    setComponents([...components])
+    setadd(true)
+    setSubmit(false)
+    
+  }  
+  return (    
+    <div style={{paddingRight:"2rem",width:"15rem",border:"1px solid blue",margin:"2rem"}}>          
+      {components.map((item, i) => ( <ListComponent text={i} submit={submit} add={add}/> ))} 
+      <button style={{backgroundColor:"blue",color:"white",alignItems:"center",marginBottom:"1rem", marginLeft:"3rem",width:"10rem"}} onClick={addComponent} >Add</button>
+   <div>  <button style={{backgroundColor:"blue",color:"white",alignItems:"center",marginBottom:"1rem", marginLeft:"3rem", width:"10rem"}} onClick={()=>{setSubmit(true);setadd(false)}}>Submit</button>  </div> 
+       
+    </div>     
+  ) 
+  
+} 
 
 export default App;
